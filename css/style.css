@@ -49,3 +49,55 @@ button#skip-btn{background:transparent;color:var(--muted);border:1px solid #2626
 .result{margin-top:12px;font-weight:700}
 
 footer{margin-top:14px;color:var(--muted);text-align:center}
+
+
+
+body {
+  background: radial-gradient(circle at center, #000000 30%, #020202 100%);
+  color: #00ffae;
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  text-shadow: 0 0 10px #00ffae;
+}
+
+/* Neon effect buttons */
+button {
+  background-color: #00ffae;
+  border: none;
+  padding: 10px 20px;
+  color: black;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+
+button:hover {
+  box-shadow: 0 0 15px #00ffae;
+  transform: scale(1.1);
+}
+
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+h1 {
+  animation: fadeIn 1s ease forwards;
+}
+
+
+@media (max-width: 600px) {
+  body {
+    font-size: 14px;
+  }
+  input, button {
+    width: 90%;
+  }
+}

@@ -20,18 +20,24 @@ function checkAnswer() {
   const userInput = document.getElementById("user-input").value.trim().toUpperCase();
   const feedback = document.getElementById("feedback");
 
+  feedback.style.transition = "all 0.3s ease";
+
   if (userInput === originalText) {
     score += 10;
     feedback.innerText = "✅ Correct! Moving to next level...";
-    feedback.style.color = "limegreen";
-    nextLevel();
+    feedback.style.color = "#00ffae";
+    feedback.style.textShadow = "0 0 10px #00ffae";
+    document.body.style.backgroundColor = "#001a00";
+    setTimeout(nextLevel, 1500);
   } else {
     feedback.innerText = "❌ Wrong! Try again.";
-    feedback.style.color = "red";
+    feedback.style.color = "#ff004c";
+    feedback.style.textShadow = "0 0 10px #ff004c";
   }
 
   document.getElementById("score").innerText = `Score: ${score}`;
 }
+
 
 function nextLevel() {
   level++;

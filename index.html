@@ -1,42 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Decrypt the Message</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Decrypt The Message</title>
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-  <div class="game">
-    <header>
-      <h1>Decrypt the Message 🔐</h1>
-      <div id="level-indicator">Level 1</div>
-    </header>
+  <header>
+    <h1>🔐 Decrypt The Message</h1>
+    <p>Crack each cipher, level by level!</p>
+  </header>
 
-    <main>
-      <div class="card">
-        <div class="label">Cipher:</div>
-        <div id="cipher-name" class="cipher-name">Caesar Cipher</div>
+  <main>
+    <section id="game">
+      <div id="level-display">Level: 1 (Caesar Cipher)</div>
+      <div id="cipher-text">Cipher Text: </div>
+      <input type="text" id="user-input" placeholder="Enter decrypted message..." />
+      <button id="submit-btn">Submit</button>
 
-        <div class="label">Encrypted Text:</div>
-        <div id="cipher-text" class="cipher-text">Khoor Zruog!</div>
+      <div id="feedback"></div>
+      <div id="score">Score: 0</div>
+      <div id="timer">Time: 60s</div>
+    </section>
 
-        <input id="user-input" placeholder="Enter decrypted message" autocomplete="off" />
-        <div class="buttons">
-          <button id="submit-btn">Submit</button>
-          <button id="hint-btn">Hint</button>
-          <button id="skip-btn">Skip</button>
-        </div>
+    <section id="hint-section">
+      <button id="hint-btn">Need a hint?</button>
+      <p id="hint-text"></p>
+    </section>
+  </main>
 
-        <div id="result" class="result"></div>
-      </div>
-    </main>
+  <footer>
+    <p>Built by <strong>Khushi Choudhary</strong> 🔒 | <a href="https://github.com/Khushichoudhary29">GitHub</a></p>
+  </footer>
 
-    <footer>
-      <small>Built by Khushi — Levels: Caesar, Atbash, Morse (starter)</small>
-    </footer>
-  </div>
-
-  <script src="script.js"></script>
+  <script src="js/caesar.js"></script>
+  <script src="js/base64.js"></script>
+  <script src="js/huffman.js"></script>
+  <script src="js/aesLite.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Decrypt the Message</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="game">
+    <header>
+      <h1>Decrypt the Message 🔐</h1>
+      <div id="level-indicator">Level 1</div>
+    </header>
+
+    <main>
+      <div class="card">
+        <div class="label">Cipher:</div>
+        <div id="cipher-name" class="cipher-name">Caesar Cipher</div>
+
+        <div class="label">Encrypted Text:</div>
+        <div id="cipher-text" class="cipher-text">Khoor Zruog!</div>
+
+        <input id="user-input" placeholder="Enter decrypted message" autocomplete="off" />
+        <div class="buttons">
+          <button id="submit-btn">Submit</button>
+          <button id="hint-btn">Hint</button>
+          <button id="skip-btn">Skip</button>
+        </div>
+
+        <div id="result" class="result"></div>
+      </div>
+    </main>
+
+    <footer>
+      <small>Built by Khushi — Levels: Caesar, Atbash, Morse (starter)</small>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

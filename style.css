@@ -1,0 +1,51 @@
+:root{
+  --bg:#0b0b0b;
+  --card:#0f0f10;
+  --accent:#00e081;
+  --muted:#9aa0a6;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Inter,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+  background:linear-gradient(180deg,#030303,#0b0b0b);
+  color:var(--accent);
+  display:flex;
+  min-height:100vh;
+  align-items:center;
+  justify-content:center;
+}
+
+.game{width:95%;max-width:780px;padding:20px}
+
+header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+h1{margin:0;font-size:1.4rem;color:var(--accent)}
+#level-indicator{font-size:0.9rem;color:var(--muted)}
+
+.card{
+  background:var(--card);
+  padding:22px;
+  border-radius:12px;
+  box-shadow:0 6px 30px rgba(0,0,0,0.6);
+}
+
+.label{font-size:0.8rem;color:var(--muted);margin-top:8px}
+.cipher-name{font-weight:700;font-size:1.05rem;margin-bottom:6px}
+.cipher-text{font-family:monospace;background:#060606;padding:14px;border-radius:8px;margin:8px 0;color:#d6ffd8}
+
+input#user-input{
+  width:100%;padding:12px;border-radius:8px;border:1px solid #202020;background:#050505;color:var(--accent);
+  outline:none;margin-top:10px;font-size:1rem;
+}
+
+.buttons{display:flex;gap:10px;margin-top:12px}
+button{
+  padding:9px 14px;border-radius:8px;border:none;background:var(--accent);color:#001;cursor:pointer;font-weight:600;
+}
+button#hint-btn{background:transparent;color:var(--muted);border:1px solid #262626}
+button#skip-btn{background:transparent;color:var(--muted);border:1px solid #262626}
+
+.result{margin-top:12px;font-weight:700}
+
+footer{margin-top:14px;color:var(--muted);text-align:center}

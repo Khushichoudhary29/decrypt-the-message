@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Decrypt The Message | Game</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    /* Cyber-style background */
+    body {
+      margin: 0;
+      padding: 0;
+      background: radial-gradient(circle at center, #000000 60%, #020202);
+      color: #00ffcc;
+      font-family: 'Courier New', monospace;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+      text-shadow: 0 0 10px #00ffcc;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 30px;
+      animation: fadeIn 1.5s ease;
+    }
+
+    header h1 {
+      font-size: 2.2em;
+      color: #00ffaa;
+      margin-bottom: 10px;
+    }
+
+    header p {
+      color: #00ffcc;
+      font-size: 1.1em;
+    }
+
+    #game {
+      text-align: center;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid #00ffaa;
+      border-radius: 15px;
+      padding: 40px 50px;
+      width: 400px;
+      box-shadow: 0 0 25px #00ffaa;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    #level-display, #cipher-text {
+      font-size: 1.1em;
+      margin-bottom: 10px;
+    }
+
+    #user-input {
+      width: 90%;
+      padding: 10px;
+      border: 2px solid #00ffaa;
+      border-radius: 10px;
+      background: #000;
+      color: #00ffaa;
+      font-size: 1em;
+      outline: none;
+      text-align: center;
+    }
+
+    #user-input:focus {
+      box-shadow: 0 0 10px #00ffaa;
+    }
+
+    #submit-btn {
+      margin-top: 15px;
+      padding: 10px 25px;
+      background: #00ffaa;
+      border: none;
+      color: #000;
+      border-radius: 10px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    #submit-btn:hover {
+      background: #00ffcc;
+      transform: scale(1.05);
+    }
+
+    #feedback {
+      margin-top: 10px;
+      min-height: 24px;
+    }
+
+    #score, #timer {
+      margin-top: 5px;
+      font-size: 1em;
+    }
+
+    #hint-section {
+      margin-top: 15px;
+    }
+
+    #hint-btn {
+      padding: 8px 18px;
+      background: transparent;
+      border: 1px solid #00ffaa;
+      color: #00ffaa;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    #hint-btn:hover {
+      background: #00ffaa;
+      color: #000;
+      transform: scale(1.05);
+    }
+
+    footer {
+      position: absolute;
+      bottom: 10px;
+      text-align: center;
+      font-size: 0.9em;
+      color: #00ffaa;
+    }
+
+    footer a {
+      color: #00ffcc;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🔐 Decrypt The Message</h1>
+    <p>Crack each cipher, level by level!</p>
+  </header>
+
+  <main>
+    <section id="game">
+      <div id="level-display">Level: 1 (Caesar Cipher)</div>
+      <div id="cipher-text">Cipher Text: </div>
+      <input type="text" id="user-input" placeholder="Enter decrypted message..." />
+      <br>
+      <button id="submit-btn">Submit</button>
+
+      <div id="feedback"></div>
+      <div id="score">Score: 0</div>
+      <div id="timer">Time: 60s</div>
+
+      <section id="hint-section">
+        <button id="hint-btn">💡 Need a hint?</button>
+        <p id="hint-text"></p>
+      </section>
+    </section>
+  </main>
+
+  <footer>
+    <p>Built by <strong>Khushi Choudhary</strong> 🔒 | <a href="https://github.com/Khushichoudhary29" target="_blank">GitHub</a></p>
+  </footer>
+
+  <script src="js/caesar.js"></script>
+  <script src="js/base64.js"></script>
+  <script src="js/huffman.js"></script>
+  <script src="js/aesLite.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

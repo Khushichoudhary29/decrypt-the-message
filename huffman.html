@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Huffman Encoding | Decrypt The Message</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: radial-gradient(circle at center, #000000 60%, #020202);
+      color: #00ffcc;
+      font-family: 'Courier New', monospace;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      text-align: center;
+      text-shadow: 0 0 10px #00ffcc;
+    }
+
+    h1 {
+      margin-top: 40px;
+      font-size: 2.6em;
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    .container {
+      background: rgba(0, 255, 170, 0.08);
+      border: 1px solid #00ffaa;
+      border-radius: 16px;
+      padding: 25px;
+      margin-top: 30px;
+      width: 80%;
+      max-width: 700px;
+      box-shadow: 0 0 25px #00ffaa44;
+    }
+
+    textarea, input {
+      width: 90%;
+      background: #000;
+      color: #00ffcc;
+      border: 1px solid #00ffaa;
+      border-radius: 10px;
+      padding: 10px;
+      font-family: 'Courier New', monospace;
+      font-size: 1em;
+      text-align: left;
+      margin-top: 10px;
+    }
+
+    button {
+      margin: 10px;
+      padding: 10px 25px;
+      background: #00ffaa;
+      color: #000;
+      border: none;
+      border-radius: 12px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+      box-shadow: 0 0 15px #00ffaa;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 35px #00ffaa;
+    }
+
+    .result {
+      margin-top: 20px;
+      font-size: 1.1em;
+      padding: 15px;
+      background: rgba(0, 255, 170, 0.1);
+      border-radius: 10px;
+      box-shadow: inset 0 0 10px #00ffaa33;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+
+    .back-btn {
+      margin-top: 25px;
+      background: transparent;
+      border: 1px solid #00ffaa;
+      color: #00ffaa;
+      padding: 10px 20px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .back-btn:hover {
+      background: #00ffaa;
+      color: #000;
+    }
+
+    footer {
+      margin-top: auto;
+      padding: 20px;
+      font-size: 0.9em;
+      color: #00ffaa;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 5px #00ffaa, 0 0 10px #00ffaa; }
+      to { text-shadow: 0 0 20px #00ffaa, 0 0 40px #00ffaa; }
+    }
+
+    .tree {
+      text-align: left;
+      margin-top: 20px;
+      color: #00ffaa;
+      font-size: 0.9em;
+      line-height: 1.5em;
+      white-space: pre;
+      border-left: 2px solid #00ffaa;
+      padding-left: 15px;
+    }
+  </style>
+</head>
+<body>
+  <h1>🌿 Huffman Encoding</h1>
+  <div class="container">
+    <p><strong>Enter your text to generate Huffman codes:</strong></p>
+    <textarea id="inputText" placeholder="Type something to compress..."></textarea><br>
+
+    <button onclick="encode()">Encode 🔒</button>
+    <button onclick="decode()">Decode 🔓</button>
+
+    <div class="result" id="resultBox">Result will appear here...</div>
+    <div class="tree" id="treeBox"></div>
+  </div>
+
+  <button class="back-btn" onclick="window.location.href='index.html'">⬅ Back to Home</button>
+
+  <footer>
+    Built by <strong>Khushi Choudhary</strong> | Huffman Encoding Game
+  </footer>
+
+  <script>
+    class Node {
+      constructor(char, freq, left = null, right = null) {
+        this.char = char;
+        this.freq = freq;
+        this.left = left;
+        this.right = right;
+      }
+    }
+
+    let huffmanCodes = {};
+    let rootNode = null;
+
+    function buildTree(freqMap) {
+      const nodes = Object.entries(freqMap).map(([char, freq]) => new Node(char, freq));
+      while (nodes.length > 1) {
+        nodes.sort((a, b) => a.freq - b.freq);
+        const left = nodes.shift();
+        const right = nodes.shift();
+        const newNode = new Node(null, left.freq + right.freq, left, right);
+        nodes.push(newNode);
+      }
+      return nodes[0];
+    }
+
+    function generateCodes(node, code = "") {
+      if (!node) return;
+      if (node.char) huffmanCodes[node.char] = code;
+      generateCodes(node.left, code + "0");
+      generateCodes(node.right, code + "1");
+    }
+
+    function encode() {
+      const text = document.getElementById("inputText").value;
+      if (!text) return showResult("⚠️ Please enter text to encode!");
+      const freqMap = {};
+      for (const char of text) freqMap[char] = (freqMap[char] || 0) + 1;
+      rootNode = buildTree(freqMap);
+      huffmanCodes = {};
+      generateCodes(rootNode);
+
+      const encoded = text.split("").map(char => huffmanCodes[char]).join("");
+      let codesDisplay = Object.entries(huffmanCodes)
+        .map(([ch, code]) => `${ch === ' ' ? '[space]' : ch} : ${code}`)
+        .join("\n");
+
+      showResult("✅ Encoded Text:\n" + encoded);
+      document.getElementById("treeBox").innerText = "🔢 Huffman Codes:\n" + codesDisplay;
+    }
+
+    function decode() {
+      const text = document.getElementById("inputText").value.trim();
+      if (!text || !rootNode) return showResult("⚠️ First encode text to generate a Huffman tree!");
+      let decoded = "";
+      let current = rootNode;
+      for (const bit of text) {
+        current = bit === "0" ? current.left : current.right;
+        if (current.char) {
+          decoded += current.char;
+          current = rootNode;
+        }
+      }
+      showResult("🔓 Decoded Text:\n" + decoded);
+    }
+
+    function showResult(msg) {
+      const box = document.getElementById("resultBox");
+      box.textContent = msg;
+      box.style.animation = "glow 1.2s ease-in-out";
+      setTimeout(() => box.style.animation = "", 1200);
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Caesar Cipher | Decrypt The Message</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: radial-gradient(circle at center, #000000 60%, #020202);
+      color: #00ffcc;
+      font-family: 'Courier New', monospace;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      text-align: center;
+      text-shadow: 0 0 10px #00ffcc;
+    }
+
+    h1 {
+      margin-top: 40px;
+      font-size: 2.8em;
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    .container {
+      background: rgba(0, 255, 170, 0.08);
+      border: 1px solid #00ffaa;
+      border-radius: 16px;
+      padding: 30px;
+      margin-top: 30px;
+      width: 80%;
+      max-width: 600px;
+      box-shadow: 0 0 25px #00ffaa44;
+    }
+
+    textarea {
+      width: 90%;
+      height: 100px;
+      background: #000;
+      color: #00ffcc;
+      border: 1px solid #00ffaa;
+      border-radius: 10px;
+      padding: 10px;
+      resize: none;
+      font-family: 'Courier New', monospace;
+      font-size: 1em;
+      text-align: left;
+    }
+
+    input[type="number"] {
+      width: 60px;
+      padding: 5px;
+      border: 1px solid #00ffaa;
+      background: #000;
+      color: #00ffcc;
+      border-radius: 6px;
+      text-align: center;
+    }
+
+    button {
+      margin: 10px;
+      padding: 10px 25px;
+      background: #00ffaa;
+      color: #000;
+      border: none;
+      border-radius: 12px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+      box-shadow: 0 0 15px #00ffaa;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 35px #00ffaa;
+    }
+
+    .result {
+      margin-top: 20px;
+      font-size: 1.2em;
+      padding: 15px;
+      background: rgba(0, 255, 170, 0.1);
+      border-radius: 10px;
+      box-shadow: inset 0 0 10px #00ffaa33;
+    }
+
+    .back-btn {
+      margin-top: 25px;
+      background: transparent;
+      border: 1px solid #00ffaa;
+      color: #00ffaa;
+      padding: 10px 20px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .back-btn:hover {
+      background: #00ffaa;
+      color: #000;
+    }
+
+    footer {
+      margin-top: auto;
+      padding: 20px;
+      font-size: 0.9em;
+      color: #00ffaa;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 5px #00ffaa, 0 0 10px #00ffaa; }
+      to { text-shadow: 0 0 20px #00ffaa, 0 0 40px #00ffaa; }
+    }
+  </style>
+</head>
+<body>
+  <h1>🧩 Caesar Cipher</h1>
+  <div class="container">
+    <p><strong>Enter your message and shift value (1–25):</strong></p>
+    <textarea id="inputText" placeholder="Type your message here..."></textarea><br><br>
+
+    <label>Shift: </label>
+    <input type="number" id="shift" min="1" max="25" value="3"><br><br>
+
+    <button onclick="encrypt()">Encrypt 🔒</button>
+    <button onclick="decrypt()">Decrypt 🔓</button>
+
+    <div class="result" id="resultBox">Result will appear here...</div>
+  </div>
+
+  <button class="back-btn" onclick="window.location.href='index.html'">⬅ Back to Home</button>
+
+  <footer>
+    Built by <strong>Khushi Choudhary</strong> | Caesar Cipher Game
+  </footer>
+
+  <script>
+    function encrypt() {
+      const text = document.getElementById('inputText').value;
+      const shift = parseInt(document.getElementById('shift').value);
+      if (!text) return showResult("⚠️ Please enter a message first!");
+      let encrypted = '';
+      for (let i = 0; i < text.length; i++) {
+        const char = text[i];
+        if (char.match(/[a-z]/i)) {
+          const code = text.charCodeAt(i);
+          let shifted;
+          if (code >= 65 && code <= 90) {
+            shifted = ((code - 65 + shift) % 26) + 65;
+          } else if (code >= 97 && code <= 122) {
+            shifted = ((code - 97 + shift) % 26) + 97;
+          }
+          encrypted += String.fromCharCode(shifted);
+        } else {
+          encrypted += char;
+        }
+      }
+      showResult("🔐 Encrypted: " + encrypted);
+    }
+
+    function decrypt() {
+      const text = document.getElementById('inputText').value;
+      const shift = parseInt(document.getElementById('shift').value);
+      if (!text) return showResult("⚠️ Please enter a message first!");
+      let decrypted = '';
+      for (let i = 0; i < text.length; i++) {
+        const char = text[i];
+        if (char.match(/[a-z]/i)) {
+          const code = text.charCodeAt(i);
+          let shifted;
+          if (code >= 65 && code <= 90) {
+            shifted = ((code - 65 - shift + 26) % 26) + 65;
+          } else if (code >= 97 && code <= 122) {
+            shifted = ((code - 97 - shift + 26) % 26) + 97;
+          }
+          decrypted += String.fromCharCode(shifted);
+        } else {
+          decrypted += char;
+        }
+      }
+      showResult("🔓 Decrypted: " + decrypted);
+    }
+
+    function showResult(message) {
+      const box = document.getElementById('resultBox');
+      box.innerText = message;
+      box.style.color = "#00ffaa";
+      box.style.animation = "glow 1.5s ease-in-out";
+      setTimeout(() => box.style.animation = '', 1500);
+    }
+  </script>
+</body>
+</html>

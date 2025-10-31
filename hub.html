@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Game Hub | Decrypt The Message</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: radial-gradient(circle at center, #010101 60%, #020202);
+      color: #00ffcc;
+      font-family: 'Courier New', monospace;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      overflow: hidden;
+      text-shadow: 0 0 10px #00ffcc;
+    }
+
+    h1 {
+      font-size: 2.8em;
+      margin-bottom: 20px;
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    .subtitle {
+      font-size: 1.2em;
+      color: #00ffaa;
+      margin-bottom: 40px;
+    }
+
+    .game-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 25px;
+      width: 80%;
+      max-width: 900px;
+    }
+
+    .game-card {
+      background: rgba(0, 255, 255, 0.08);
+      border: 1px solid #00ffaa;
+      border-radius: 16px;
+      padding: 25px;
+      cursor: pointer;
+      transition: 0.3s;
+      box-shadow: 0 0 20px #00ffaa22;
+      text-align: center;
+    }
+
+    .game-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 40px #00ffaa55;
+    }
+
+    .game-card h2 {
+      color: #00ffcc;
+      margin-bottom: 10px;
+      text-shadow: 0 0 10px #00ffaa;
+    }
+
+    .game-card p {
+      color: #bdfcf8;
+      font-size: 0.9em;
+    }
+
+    button.back {
+      margin-top: 40px;
+      padding: 10px 25px;
+      background: transparent;
+      border: 1px solid #00ffaa;
+      color: #00ffaa;
+      font-weight: bold;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button.back:hover {
+      background: #00ffaa;
+      color: #000;
+      transform: scale(1.05);
+    }
+
+    footer {
+      position: absolute;
+      bottom: 15px;
+      font-size: 0.9em;
+      color: #00ffaa;
+    }
+
+    footer a {
+      color: #00ffcc;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 5px #00ffaa, 0 0 10px #00ffaa; }
+      to { text-shadow: 0 0 20px #00ffaa, 0 0 30px #00ffaa; }
+    }
+  </style>
+</head>
+<body>
+  <h1>🧠 Choose Your Cipher</h1>
+  <div class="subtitle">Select a challenge and start decrypting!</div>
+
+  <div class="game-grid">
+    <div class="game-card" onclick="openGame('game.html')">
+      <h2>🔤 Caesar Cipher</h2>
+      <p>Shift letters by a secret key. Classic cryptography made fun!</p>
+    </div>
+
+    <div class="game-card" onclick="openGame('base64.html')">
+      <h2>🧬 Base64 Encoder</h2>
+      <p>Convert text to Base64 and decode hidden messages.</p>
+    </div>
+
+    <div class="game-card" onclick="openGame('huffman.html')">
+      <h2>🧩 Huffman Encoding</h2>
+      <p>Compress and decrypt data using Huffman’s smart algorithm.</p>
+    </div>
+
+    <div class="game-card" onclick="openGame('aesLite.html')">
+      <h2>🔒 AES-Lite Encryption</h2>
+      <p>Modern encryption simplified — protect and decrypt secrets.</p>
+    </div>
+  </div>
+
+  <button class="back" onclick="window.location.href='index.html'">⬅ Back to Home</button>
+
+  <footer>
+    Built by <strong>Khushi Choudhary</strong> 🔐 |
+    <a href="https://github.com/Khushichoudhary29" target="_blank">GitHub</a>
+  </footer>
+
+  <script>
+    function openGame(page) {
+      window.location.href = page;
+    }
+  </script>
+</body>
+</html>

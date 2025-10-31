@@ -3,41 +3,167 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Decrypt The Message</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <title>Decrypt The Message | Game Hub</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: radial-gradient(circle at center, #000000 60%, #020202);
+      color: #00ffcc;
+      font-family: 'Courier New', monospace;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      min-height: 100vh;
+      text-align: center;
+      overflow-x: hidden;
+      text-shadow: 0 0 10px #00ffcc;
+    }
+
+    h1 {
+      font-size: 3em;
+      margin: 40px 0 10px;
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    p {
+      font-size: 1.1em;
+      max-width: 700px;
+      margin: 10px auto 40px;
+      color: #bdfcf8;
+    }
+
+    .game-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 25px;
+      width: 85%;
+      margin-bottom: 50px;
+    }
+
+    .game-card {
+      background: rgba(0, 255, 170, 0.05);
+      border: 1px solid #00ffaa;
+      border-radius: 16px;
+      padding: 25px;
+      transition: 0.4s;
+      box-shadow: 0 0 15px #00ffaa33;
+      cursor: pointer;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .game-card:hover {
+      transform: scale(1.05);
+      background: rgba(0, 255, 170, 0.1);
+      box-shadow: 0 0 35px #00ffaa;
+    }
+
+    .game-card h2 {
+      color: #00ffaa;
+      margin-bottom: 10px;
+    }
+
+    .game-card p {
+      font-size: 0.95em;
+      color: #bdfcf8;
+    }
+
+    button {
+      padding: 12px 30px;
+      border: none;
+      background: #00ffaa;
+      color: #000;
+      font-weight: bold;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: 0.3s;
+      margin-top: 20px;
+      box-shadow: 0 0 20px #00ffaa;
+    }
+
+    button:hover {
+      background: #00ffcc;
+      transform: scale(1.05);
+      box-shadow: 0 0 35px #00ffaa;
+    }
+
+    footer {
+      margin-top: auto;
+      padding: 15px;
+      text-align: center;
+      font-size: 0.9em;
+      color: #00ffaa;
+    }
+
+    footer a {
+      color: #00ffcc;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 5px #00ffaa, 0 0 10px #00ffaa; }
+      to { text-shadow: 0 0 20px #00ffaa, 0 0 30px #00ffaa; }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <h1>🔐 Decrypt The Message</h1>
-    <p>Crack each cipher, level by level!</p>
-  </header>
+  <h1>🔐 Decrypt The Message</h1>
+  <p>Welcome to the ultimate cryptography challenge hub.  
+  Choose your mission and prove your decoding skills.</p>
 
-  <main>
-    <section id="game">
-      <div id="level-display">Level: 1 (Caesar Cipher)</div>
-      <div id="cipher-text">Cipher Text: </div>
-      <input type="text" id="user-input" placeholder="Enter decrypted message..." />
-      <button id="submit-btn">Submit</button>
+  <div class="game-grid">
+    <div class="game-card" onclick="openGame('caesar.html')">
+      <h2>🧩 Caesar Cipher</h2>
+      <p>Crack simple shift-based encryption like Julius Caesar used.</p>
+    </div>
 
-      <div id="feedback"></div>
-      <div id="score">Score: 0</div>
-      <div id="timer">Time: 60s</div>
-    </section>
+    <div class="game-card" onclick="openGame('huffman.html')">
+      <h2>📦 Huffman Encoding</h2>
+      <p>Compress and decode text based on frequency. Think efficiently.</p>
+    </div>
 
-    <section id="hint-section">
-      <button id="hint-btn">Need a hint?</button>
-      <p id="hint-text"></p>
-    </section>
-  </main>
+    <div class="game-card" onclick="openGame('aes.html')">
+      <h2>🔒 AES Encryption</h2>
+      <p>Decode modern encryption and test your cryptography IQ.</p>
+    </div>
+
+    <div class="game-card" onclick="openGame('morse.html')">
+      <h2>📡 Morse Code Challenge</h2>
+      <p>Dots and dashes are more than noise. Can you translate fast enough?</p>
+    </div>
+
+    <div class="game-card" onclick="openGame('binary.html')">
+      <h2>💾 Binary Breakdown</h2>
+      <p>Turn binary to text and back — master the language of machines.</p>
+    </div>
+
+    <div class="game-card" onclick="openGame('riddle.html')">
+      <h2>🧠 Mystery Cipher</h2>
+      <p>Random encrypted riddles that change each time you play.</p>
+    </div>
+  </div>
+
+  <button onclick="openGame('leaderboard.html')">🏆 View Leaderboard</button>
 
   <footer>
-    <p>Built by <strong>Khushi Choudhary</strong> 🔒 | <a href="https://github.com/Khushichoudhary29">GitHub</a></p>
+    Built by <strong>Khushi Choudhary</strong> 🔒 |
+    <a href="https://github.com/Khushichoudhary29" target="_blank">GitHub</a>
   </footer>
 
-  <script src="js/caesar.js"></script>
-  <script src="js/base64.js"></script>
-  <script src="js/huffman.js"></script>
-  <script src="js/aesLite.js"></script>
-  <script src="js/main.js"></script>
+  <script>
+    function openGame(page) {
+      window.location.href = page;
+    }
+  </script>
 </body>
 </html>
